@@ -1,0 +1,34 @@
+<?php
+
+
+$host = 'localhost';
+$user = 'root';
+$password = '';
+$database = 'test2';
+
+$conn = mysqli_connect($host, $user, $password, $database);
+
+$response = array();
+
+$sql_query="SELECT * FROM test22";
+$result = mysqli_query($conn,$sql_query);
+
+if(mysqli_num_rows($result) > 0){
+	$response['success']=1;
+	$test22 = array();
+	while($row = mysqli_fetch_assoc($result)){
+
+	array_push($test22,$row);
+}
+	$response['test22']=$test22;
+}
+else{
+	$response['success'] = 0;
+	$response['message'] = 'Data Yok';
+}
+echo json_encode($response);
+mysqli_close($conn);
+
+	
+?>
+
